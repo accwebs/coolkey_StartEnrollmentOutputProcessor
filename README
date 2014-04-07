@@ -1,0 +1,51 @@
+********************************************************************************
+Title       : CKYStartEnrollmentOutputProcessor
+Project URL : https://github.com/accwebs/coolkey_StartEnrollmentOutputProcessor
+Authors     : Aaron Curley <accwebs@gmail.com>
+License     : See file LICENSE
+Requires    : OpenSSL http://www.openssl.org/
+********************************************************************************
+
+--------------------------
+  Introduction & Credits
+--------------------------
+
+CKYStartEnrollmentOutputProcessor is a simple utility tool that performs processing
+and validation of the result of Coolkey's SecureStartEnrollment() command.  The tool
+Parses and retrieves the public key, and verifies that the proof-of-location field 
+(signature) is as expected.
+
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit.
+ (http://www.openssl.org/)
+
+ 
+--------------------------
+ Downloading & Compiling
+--------------------------
+
+Due to the "beta" and experimental nature of the code, the author does not intend to distribute 
+binaries at this time.  Compilation is fairly simple; however, using CMake.  Note that a fairly
+modern compiler is required as certain C++ 11 features are used in the source code.  If you find
+incompatibilities preventing compliation on certain platforms, please file a bug report.
+
+Required third party dependencies:
+* OpenSSL        (headers and libraries)
+
+Tested compilers:
+* Visual Studio 2010
+* Visual Studio 2013
+* GCC 4.8 64-bit
+
+
+--------------------------
+ Program Use & Execution
+--------------------------
+Usage: 
+  CKYStartEnrollmentOutputProcessor.exe <resulting iobuf file> <wrappedkey file>
+Where parameters 1 and 2 are files on the hard disk that contain data in ASCII-hex format on a single line.
+
+Example iobuf file: (reassembled from gpshell output of multiple ReadObject() commands to Coolkey)
+010B0001080001009A915171D6DA0B72A764191315D32904C3BEE4CF3302684F0385106D64805EF72F27C57CD0F076F4B6B65F5841A8A05E61053820C49EC48C440BB6E639270AAD2A2A74549BD0ECF3FFBA058870BF4C37A49B7AE0823878661445025620E991E9BDB1745F7596F62361B31F556C73BDD72F58E71E615F3DFBEC6BD9BCF9463396D5553B0738BC7628DDC52C751A2DB81125935ABEBAB2CC1EB285AE7AD7878ED8E91A672AE7C4E52FC860C546BDE43F61BB0F755312D2FCE9AB90F9E3DEA616B09773AC291CEBBC69BB7848C8D9BAC3ED2FD9C3EB456D98FEE0FA0E82C916647D10A226334DBBFB8F18434D1C506DB6357D0CA6A7DECDAA47E07FE6B24FDE59C90003010001010058136A018EC6C20DFD88628EE845750553B31EF000F970DBA07F45111C5D1C0C2832166DE7FFF965585FF131E4242BF8AC5BD3B42AA073BBBF099F9F78964B95172ED4ED29DABB0DE96F8BDCD34419D20963D52D3210D09D5BB3C8F42F1ADB895A0CFB0908EAB6675F616F23C6ED95BE36C141396408595A7A7F19C04D91959FB1D6FC8AD465B7745E9C2659F317D031AE26E2F540D3264EEEA3C7902998C0D2F93E35525116B231ADF30EECCEF3E33EECE0AC325FDCC75E4EA0B9178057F599B90F913D8EE70800D083DB2D48C3AEF8F529593A9C581D5ADB25BD2CCDBBDE6F7338384D6FEC3FB79905FCD655DB0CAB918C819318FF03591409FACB8540920B
+
+Example wrappedkey file: (this is provided as input to the SecureStartEnrollment() command to Coolkey; keep in mind that the wrappedkey must be first encrypted with the S-DEK before sending the APDU to Coolkey with gpshell)
+13D20EA52D9C93033F949F1A11239D68
